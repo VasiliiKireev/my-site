@@ -1,11 +1,39 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
-    // 1. Инициализация карты
+    // --- 1. Эффект матрицы на фоне ---
+    const canvas = document.createElement('canvas');
+    canvas.id = 'matrix-canvas';
+    document.body.prepend(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+
+    function drawMatrix() {
+        ctx.fillStyle = "rgba(18, 16, 16, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#4a5a4a"; // Темно-зеленый цвет
+        ctx.font = fontSize + "px monospace";
+        for (let i = 0; i < drops.length; i++) {
+            const text = letters.charAt(Math.floor(Math.random() * letters.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        }
+    }
+    setInterval(drawMatrix, 35);
+
+    // --- 2. Карта ---
     const map = L.map('map').setView([20, 0], 2);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         attribution: '© OpenStreetMap © CartoDB'
     }).addTo(map);
 
-    // Данные для карты (пример)
     const breachData = [
         { coords: [37.0902, -95.7129], count: 150, country: "США" },
         { coords: [51.1657, 10.4515], count: 80, country: "Германия" },
@@ -22,7 +50,7 @@
         }).addTo(map).bindPopup(`<b>${breach.country}</b><br>Утечек: ${breach.count} млн`);
     });
 
-    // 2. Обработка формы
+    // --- 3. Форма ---
     const form = document.getElementById('check-form');
     const emailInput = document.getElementById('emailInput');
     const resultBox = document.getElementById('result');

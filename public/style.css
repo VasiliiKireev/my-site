@@ -1,65 +1,175 @@
-﻿* { box-sizing: border-box; margin: 0; padding: 0; }
+﻿/* Базовые настройки и текстура старой бумаги */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1a1a1a;
+    color: #c2d1c2;
+    background-image: 
+        linear-gradient(rgba(18, 16, 16, 0.9), rgba(18, 16, 16, 0.9)),
+        url('https://www.transparenttextures.com/patterns/dark-matter.png'); /* Текстура старой бумаги/шума */
+    background-attachment: fixed;
+    overflow-x: hidden;
 }
+
+/* Холст для матрицы */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.15;
+}
+
+/* Шапка */
 header {
     text-align: center;
-    padding: 40px 20px;
-    background: linear-gradient(180deg, #1e1e1e 0%, #121212 100%);
-    border-bottom: 1px solid #333;
+    padding: 50px 20px 30px;
+    border-bottom: 2px solid #3a4a3a;
+    background: linear-gradient(180deg, rgba(20, 25, 20, 0.9) 0%, rgba(18, 16, 16, 0) 100%);
 }
-header h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
-header p { color: #aaa; }
+header h1 {
+    font-size: 2.8rem;
+    color: #d8e0d8;
+    text-shadow: 0 0 10px #4a5a4a, 2px 2px 4px #000;
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+}
+header p {
+    color: #8a9a8a;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+/* Основной контейнер */
 main {
-    max-width: 1000px;
-    margin: 20px auto;
+    max-width: 1100px;
+    margin: 30px auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 10;
 }
+
+/* Карта */
 #map {
-    height: 450px;
+    height: 500px;
     width: 100%;
-    border-radius: 12px;
-    border: 2px solid #333;
-    margin-bottom: 30px;
-    background-color: #1e1e1e;
+    border-radius: 8px;
+    border: 2px solid #6a7a6a;
+    box-shadow: 0 0 20px rgba(74, 90, 74, 0.4);
+    margin-bottom: 40px;
+    background-color: #111;
 }
+/* Фильтр для карты, чтобы сделать её темной и ретро */
+.leaflet-layer {
+    filter: grayscale(100%) invert(90%) brightness(80%) sepia(30%) hue-rotate(50deg); 
+}
+
+/* Блок проверки */
 .checker {
-    background-color: #1e1e1e;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #333;
+    background-color: rgba(20, 25, 20, 0.85);
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid #4a5a4a;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
     text-align: center;
+    backdrop-filter: blur(2px);
 }
-.checker h2 { color: #fff; margin-bottom: 10px; }
-.checker p { color: #aaa; margin-bottom: 20px; }
-#check-form { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+.checker h2 {
+    color: #d8e0d8;
+    font-size: 2rem;
+    text-shadow: 0 0 8px #4a5a4a;
+    margin-bottom: 15px;
+}
+.checker p { color: #8a9a8a; margin-bottom: 25px; }
+
+/* Форма */
+#check-form {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
 #check-form input {
-    padding: 12px 16px;
-    width: 300px;
-    border-radius: 6px;
-    border: 1px solid #444;
-    background-color: #2a2a2a;
-    color: #fff;
-    font-size: 1rem;
+    padding: 12px 18px;
+    width: 320px;
+    border-radius: 4px;
+    border: 1px solid #4a5a4a;
+    background-color: #0d0d0d;
+    color: #00ff88;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
 }
-#check-form input:focus { outline: none; border-color: #00ff88; }
+#check-form input:focus {
+    outline: none;
+    border-color: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
 #check-form button {
-    padding: 12px 24px;
+    padding: 12px 25px;
+    background-color: #000;
+    color: #00ff88;
+    border: 1px solid #00ff88;
+    border-radius: 4px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#check-form button:hover {
     background-color: #00ff88;
     color: #000;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
+    box-shadow: 0 0 15px #00ff88;
 }
-#check-form button:hover { background-color: #00cc6a; }
-.result-box { margin-top: 20px; padding: 20px; border-radius: 6px; display: none; text-align: left; }
+
+/* Блок результатов */
+.result-box {
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 4px;
+    display: none;
+    text-align: left;
+    font-size: 1rem;
+}
 .result-box.active { display: block; }
-.result-box.clean { background-color: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; color: #00ff88; }
-.result-box.danger { background-color: rgba(255, 68, 68, 0.1); border: 1px solid #ff4444; color: #ff4444; }
-.result-box h3 { margin-bottom: 10px; }
-.result-box ul { margin: 10px 0 10px 20px; }
+
+/* Успешный результат (Чисто) */
+.result-box.clean {
+    background-color: rgba(0, 255, 136, 0.05);
+    border: 1px dashed #00ff88;
+    color: #00ff88;
+    box-shadow: inset 0 0 10px rgba(0, 255, 136, 0.1);
+}
+/* Опасность (Утечка) */
+.result-box.danger {
+    background-color: rgba(255, 68, 68, 0.05);
+    border: 1px dashed #ff4444;
+    color: #ff4444;
+    box-shadow: inset 0 0 10px rgba(255, 68, 68, 0.1);
+}
+.result-box h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.result-box ul { margin: 15px 0; padding-left: 20px; }
+.result-box li { margin-bottom: 8px; }
+
+/* Элементы 18 века/стимпанк (декор) */
+.checker::before {
+    content: "⚙";
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    font-size: 40px;
+    color: #4a5a4a;
+    opacity: 0.5;
+    animation: spin 10s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
