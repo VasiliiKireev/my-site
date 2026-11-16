@@ -8,19 +8,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Фон матрицы -->
+    <!-- Фон матрицы/ретро -->
     <canvas id="matrix-canvas"></canvas>
 
     <!-- Шапка -->
     <header class="top-header">
         <h1>🌍 ГЛОБАЛЬНАЯ КАРТА УТЕЧЕК ДАННЫХ</h1>
         <p>Размер и цвет кругов показывают количество скомпрометированных аккаунтов по странам</p>
-        <p class="source">Источник: Surfshark Global Data Breach Statistics, 2023, 2024, 2025, Q3 2026. Показатель — количество скомпрометированных аккаунтов, в млн.</p>
+        <p class="source">Источник: Surfshark Global Data Breach Statistics, 2023, 2024, 2025, Q3 2026.</p>
+        
+        <!-- Кнопка меню справа сверху -->
+        <button id="menu-toggle" class="menu-btn">☰ Меню</button>
     </header>
 
     <div class="main-container">
         <!-- Левая панель -->
-        <aside class="left-sidebar">
+        <aside class="left-sidebar" id="sidebar">
             <div class="radar-container">
                 <div class="radar"></div>
             </div>
@@ -64,13 +67,8 @@
                 <form id="check-form">
                     <input type="email" id="emailInput" placeholder="ivan@gmail.com" required>
                     <button type="submit">ПРОВЕРИТЬ</button>
-                    <div class="sound-toggle">
-                        <input type="checkbox" id="soundCheck" checked>
-                        <label for="soundCheck">🔊 Звук</label>
-                    </div>
                 </form>
                 <div id="result" class="result-box"></div>
-                <p class="last-check">Последняя проверка: <span id="last-check-time">10 мин назад</span></p>
             </div>
         </main>
     </div>
