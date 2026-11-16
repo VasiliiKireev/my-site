@@ -1,1 +1,33 @@
-﻿<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><title>Новый сайт</title></head><body></body></html>
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глобальная карта утечек</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🌍 Глобальная карта утечек</h1>
+        <p>Размер и цвет кругов показывают количество утечек по странам</p>
+    </header>
+
+    <main>
+        <div id="map"></div>
+
+        <section class="checker">
+            <h2>🔍 Проверить ваш email</h2>
+            <p>Введите email, чтобы узнать, был ли он скомпрометирован.</p>
+            <form id="check-form">
+                <input type="email" id="emailInput" placeholder="ivan@gmail.com" required>
+                <button type="submit">ПРОВЕРИТЬ</button>
+            </form>
+            <div id="result" class="result-box"></div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
