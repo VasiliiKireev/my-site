@@ -1,12 +1,50 @@
-﻿{
-  "name": "my-site",
-  "version": "1.0.0",
-  "description": "Global data breach map",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2"
-  }
-}
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глобальная карта утечек данных</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <h1>🌍 Глобальная карта утечек</h1>
+        <p class="subtitle">Узнайте, насколько защищены ваши данные в цифровом мире</p>
+    </header>
+
+    <main class="container">
+        <section class="section card">
+            <h2>География утечек</h2>
+            <p class="description">Размер и цвет кругов показывают количество утечек по странам. Это наглядно демонстрирует, что киберугрозы — глобальная проблема.</p>
+            <div id="map-container" class="map-placeholder">
+                <p>Карта загружается...</p>
+            </div>
+        </section>
+
+        <section class="section card checker">
+            <h2>🔍 Проверить ваш email</h2>
+            <p class="description">Введите свой email, чтобы узнать, был ли он скомпрометирован в известных утечках данных.</p>
+            <form id="check-form" class="input-group">
+                <input type="email" id="emailInput" placeholder="ivan@gmail.com" required>
+                <button type="submit" id="checkBtn">ПРОВЕРИТЬ</button>
+            </form>
+            <div id="result" class="result-box"></div>
+        </section>
+
+        <section class="section card chart-section">
+            <h2>📈 Динамика утечек по годам</h2>
+            <p class="description">С каждым годом количество утечек растёт. Этот график доказывает, что проблема становится всё более масштабной.</p>
+            <div id="chart-container" class="chart-placeholder">
+                <p>График загружается...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Данные предоставлены <a href="https://haveibeenpwned.com/" target="_blank">Have I Been Pwned</a>. Сайт не хранит ваши данные и не передаёт их третьим лицам.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
