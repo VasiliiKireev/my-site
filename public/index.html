@@ -3,48 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Глобальная карта утечек данных</title>
+    <title>Глобальная карта утечек</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <h1>🌍 Глобальная карта утечек</h1>
-        <p class="subtitle">Узнайте, насколько защищены ваши данные в цифровом мире</p>
+    <!-- Фон матрицы -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <!-- Шапка -->
+    <header class="top-header">
+        <h1>🌍 ГЛОБАЛЬНАЯ КАРТА УТЕЧЕК ДАННЫХ</h1>
+        <p>Размер и цвет кругов показывают количество скомпрометированных аккаунтов по странам</p>
+        <p class="source">Источник: Surfshark Global Data Breach Statistics, 2023, 2024, 2025, Q3 2026. Показатель — количество скомпрометированных аккаунтов, в млн.</p>
     </header>
 
-    <main class="container">
-        <section class="section card">
-            <h2>География утечек</h2>
-            <p class="description">Размер и цвет кругов показывают количество утечек по странам. Это наглядно демонстрирует, что киберугрозы — глобальная проблема.</p>
-            <div id="map-container" class="map-placeholder">
-                <p>Карта загружается...</p>
+    <div class="main-container">
+        <!-- Левая панель -->
+        <aside class="left-sidebar">
+            <div class="radar-container">
+                <div class="radar"></div>
             </div>
-        </section>
-
-        <section class="section card checker">
-            <h2>🔍 Проверить ваш email</h2>
-            <p class="description">Введите свой email, чтобы узнать, был ли он скомпрометирован в известных утечках данных.</p>
-            <form id="check-form" class="input-group">
-                <input type="email" id="emailInput" placeholder="ivan@gmail.com" required>
-                <button type="submit" id="checkBtn">ПРОВЕРИТЬ</button>
-            </form>
-            <div id="result" class="result-box"></div>
-        </section>
-
-        <section class="section card chart-section">
-            <h2>📈 Динамика утечек по годам</h2>
-            <p class="description">С каждым годом количество утечек растёт. Этот график доказывает, что проблема становится всё более масштабной.</p>
-            <div id="chart-container" class="chart-placeholder">
-                <p>График загружается...</p>
+            <div class="quick-start">
+                <h3>🚀 БЫСТРЫЙ СТАРТ</h3>
+                <a href="#email-check">Проверить email</a>
+                <a href="#password-check">Проверить пароль</a>
             </div>
-        </section>
-    </main>
+            <div class="stats-box">
+                <h3>📊 СТАТИСТИКА</h3>
+                <div class="stat-item">Проверок сегодня: <span id="daily-checks">0</span></div>
+                <div class="stat-item">Угроза: <span class="highlight">НЕБОЛЬШАЯ</span></div>
+                <div class="stat-item">Всего утечек: <span class="highlight">61,855,747</span></div>
+            </div>
+            <div class="terminal-log" id="terminal-log">
+                <p>[RU] Проверка контактов... V6...</p>
+                <p>[BR] База утечек обновлена.</p>
+                <p>[UK] Поиск в теневых сетях...</p>
+            </div>
+            <div class="total-checks">Проверено: <span id="total-checks">21</span></div>
+        </aside>
 
-    <footer class="footer">
-        <p>Данные предоставлены <a href="https://haveibeenpwned.com/" target="_blank">Have I Been Pwned</a>. Сайт не хранит ваши данные и не передаёт их третьим лицам.</p>
-    </footer>
+        <!-- Правая часть с картой и формой -->
+        <main class="content-area">
+            <!-- Карта -->
+            <div class="map-wrapper">
+                <div id="map"></div>
+                <div class="year-filters">
+                    <button class="year-btn active">2023</button>
+                    <button class="year-btn">2024</button>
+                    <button class="year-btn">2025</button>
+                    <button class="year-btn">2026</button>
+                </div>
+            </div>
 
+            <!-- Форма проверки -->
+            <div class="email-checker-box" id="email-check">
+                <h2>🔍 Проверить ваш email</h2>
+                <p>Узнайте за 5 секунд, фигурировал ли ваш адрес в публичных утечках</p>
+                <p class="demo-hint">Попробуйте <span class="demo-email">test@example.com</span> (демо-утечка) или введите свой email.</p>
+                <form id="check-form">
+                    <input type="email" id="emailInput" placeholder="ivan@gmail.com" required>
+                    <button type="submit">ПРОВЕРИТЬ</button>
+                    <div class="sound-toggle">
+                        <input type="checkbox" id="soundCheck" checked>
+                        <label for="soundCheck">🔊 Звук</label>
+                    </div>
+                </form>
+                <div id="result" class="result-box"></div>
+                <p class="last-check">Последняя проверка: <span id="last-check-time">10 мин назад</span></p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
