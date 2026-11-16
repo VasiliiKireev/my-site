@@ -15,9 +15,9 @@
     for (let x = 0; x < columns; x++) drops[x] = 1;
 
     function drawMatrix() {
-        ctx.fillStyle = "rgba(18, 16, 16, 0.05)";
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#4a5a4a"; // Темно-зеленый цвет
+        ctx.fillStyle = "#00ff88"; // Яркий зеленый
         ctx.font = fontSize + "px monospace";
         for (let i = 0; i < drops.length; i++) {
             const text = letters.charAt(Math.floor(Math.random() * letters.length));
@@ -28,10 +28,10 @@
     }
     setInterval(drawMatrix, 35);
 
-    // --- 2. Карта ---
+    // --- 2. Карта (OpenStreetMap без ключей) ---
     const map = L.map('map').setView([20, 0], 2);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '© OpenStreetMap © CartoDB'
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
     const breachData = [
